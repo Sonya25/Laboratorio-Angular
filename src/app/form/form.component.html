@@ -1,0 +1,65 @@
+<div class="form">
+    <form (ngSubmit)="registro()" [formGroup]="contactform">
+      <h1 class="h1">Formulario de registro de nuevos socios</h1>
+  
+      <mat-form-field style="margin: auto;" class="inputs" placeholder="Nombre">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" autocomplete="off" name="nombre" id="nombre" required minlength="3" formControlName="nombre" placeholder="Nombre">
+      </mat-form-field>
+      <br><br>
+  
+  
+      <mat-form-field style="margin: auto;" class="inputs">
+        <mat-label>Apellidos</mat-label>
+        <input matInput type="text" autocomplete="off" name="apellidos" id="apellidos" required minlength="3" formControlName="apellidos" placeholder="Apellidos">
+      </mat-form-field>
+      <br><br>
+  
+      <mat-form-field style="margin: auto;" class="inputs">
+        <mat-label>DNI</mat-label>
+        <input matInput type="text" autocomplete="off" name="dni" id="dni" required minlength="9" maxlength="9" formControlName="dni" placeholder="DNI">
+      </mat-form-field>
+      <br><br>
+  
+      <mat-form-field style="margin: auto;" class="inputs">
+        <mat-label>Teléfono</mat-label>
+        <input matInput type="text" autocomplete="off" name="telefono" id="telefono" required minlength="9" maxlength="9" formControlName="telefono" placeholder="Número de teléfono">
+      </mat-form-field>
+      <br><br>
+
+      <mat-form-field style="margin: auto;" class="inputs">
+        <mat-label>Sexo</mat-label>
+        <select matInput required name="sexo" name="sexo" id="sexo" formControlName="sexo" placeholder="Sexo">
+          <option disabled selected></option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+      </mat-form-field>
+      <br><br>
+
+      <mat-label>
+        <button type="submit" mat-raised-button [disabled]="!contactform.valid" color="primary" (click)="registro()">Registro</button> 
+      </mat-label>
+      <br><br>
+    </form>
+  </div>
+  
+  
+  <mat-list>
+    <mat-list-item *ngFor="let s of socios">
+      <div class="div-datos">
+        <span> Nombre: {{ s == newSocio ? contactform.value.nombre : s.nombre }} | </span>
+        <span> Apellidos: {{ s == newSocio ? contactform.value.apellidos : s.apellidos }} | </span>
+        <span> DNI: {{ s == newSocio ? contactform.value.dni : s.dni }} | </span>
+        <span> Teléfono: {{ s == newSocio ? contactform.value.telefono : s.telefono }} | </span>
+        <span> Sexo: {{ s == newSocio ? contactform.value.sexo : s.sexo }} | </span>
+        <span> Nº Socio: {{ s == newSocio ? contactform.value.numSocio : s.socio }} </span>
+  
+      </div>
+       &nbsp;&nbsp;
+      <div>
+        <button mat-raised-button  (click)="modificar($event, s)">{{ s == newSocio ? "Hecho" : "Modificar" }}</button> &nbsp;
+        <button mat-raised-button (click)="delete($event, s)">Eliminar</button>
+    </div>
+    </mat-list-item>
+  </mat-list>
